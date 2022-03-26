@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>YOGAML</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ahana Yoga HTML Template">
+	<meta name="keywords" content="yoga, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/nice-select.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header Section -->
+	<header class="header-section">
+		
+		<div class="header-bottom">
+			<a href="{% url 'home' %}" class="site-logo">
+				<img src="{% static 'img/logo-.png' %}" alt="">
+			</a>
+			
+			<div class="container">
+				<ul class="main-menu">
+					<li><a href="{% url 'home' %}" class="active">Home</a></li>
+					<li><a href="{% url 'view_poses' %}">View poses</a></li>
+                    <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+					<li><a href="{% url 'view_profile' %}">My Profile</a></li>
+					<li><a href="{% url 'my_progress' %}">My Progress</a></li>
+					<li><a href="/logout/">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	
+    {% block main %}
+    {% endblock %}
+
+    <div class="gallery-section">
+		<div class="gallery-slider owl-carousel">
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/1.jpg' %}" alt="">
+				
+			</div>
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/2.jpg' %}" alt="">
+				
+			</div>
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/3.jpg' %}" alt="">
+				
+			</div>
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/4.jpg' %}" alt="">
+				
+			</div>
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/5.jpg' %}" alt="">
+				
+			</div>
+			<div class="gs-item">
+				<img src="{% static 'img/gallery/6.jpg' %}" alt="">
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer Section -->
+
+	<div class="back-to-top"><img src="img/icons/up-arrow.png" alt=""></div>
+
+	<!-- Search model -->
+	<div class="search-model set-bg" data-setbg="img/search-bg.jpg">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch"><i class="material-icons">close</i></div>
+			<form class="search-moderl-form">
+				<input type="text" id="search-input" placeholder="Search">
+				<button><img src="img/icons/search-2.png" alt=""></button>
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
+
+	<script src="{% static 'js/vendor/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+    
+    {% block js %}
+    {% endblock %}
+
+	</body>
+</html>

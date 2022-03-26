@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>YOGAML</title>
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+
+</head>
+
+<body>
+    <a href="{% url 'home' %}" class="site-logo">
+        <img src="{% static 'img/logo-.png' %}" alt="">
+    </a>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Add Pose</h2>
+                    <form method="POST" action="{% url 'add_pose' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Pose Name</label>
+                                    <input class="input--style-4" type="text" name="pose_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Pose description</label>
+                                    <input class="input--style-4" type="text" name="pose_description">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Duration</label>
+                                    <input class="input--style-4" type="number" name="user_duration">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Enter Image Url</label>
+                                    <input class="input--style-4" type="text" name="img_url" id="img_url" onchange="document.getElementById('img_show').src=document.getElementById('img_url').value;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <img id='img_show' src='' alt="" style="height:200px; width:200px;" crossorigin='anonymous'/>
+                        <button class="site-btn sb-gradient" type="button" id="generate">Upload</button>
+                        <div class="center">
+                            <div class="input-group ">
+                                    <label class="label">Pose Type</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="pose_type" class="input--style-4" style="padding: 10px;">
+                                            <option disabled="disabled" selected="selected" >Choose option</option>
+                                            <option>Beginner</option>
+                                            <option>Intermediate</option>
+                                            <option>Advanced</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                          </div> 
+                          <input type="number" step="any" name="nose_x" id="nose_x" hidden>
+                          <input type="number" step="any" name="nose_y" id="nose_y" hidden>
+                          <input type="number" step="any" name="leftear_x" id="leftear_x" hidden>
+                          <input type="number" step="any" name="leftear_y" id="leftear_y" hidden>
+                          <input type="number" step="any" name="rightear_x" id="rightear_x" hidden>
+                          <input type="number" step="any" name="rightear_y" id="rightear_y" hidden>
+                          <input type="number" step="any" name="lefteye_x" id="lefteye_x" hidden>
+                          <input type="number" step="any" name="lefteye_y" id="lefteye_y" hidden>
+                          <input type="number" step="any" name="righteye_x" id="righteye_x" hidden>
+                          <input type="number" step="any" name="righteye_y" id="righteye_y" hidden>
+                          <input type="number" step="any" name="leftshoulder_x" id="leftshoulder_x" hidden>
+                          <input type="number" step="any" name="leftshoulder_y" id="leftshoulder_y" hidden>
+                          <input type="number" step="any" name="rightshoulder_x" id="rightshoulder_x" hidden>
+                          <input type="number" step="any" name="rightshoulder_y" id="rightshoulder_y" hidden>
+                          <input type="number" step="any" name="leftelbow_x" id="leftelbow_x" hidden>
+                          <input type="number" step="any" name="leftelbow_y" id="leftelbow_y" hidden>
+                          <input type="number" step="any" name="rightelbow_x" id="rightelbow_x" hidden>
+                          <input type="number" step="any" name="rightelbow_y" id="rightelbow_y" hidden>
+                          <input type="number" step="any" name="leftwrist_x" id="leftwrist_x" hidden>
+                          <input type="number" step="any" name="leftwrist_y" id="leftwrist_y" hidden>
+                          <input type="number" step="any" name="rightwrist_x" id="rightwrist_x" hidden>
+                          <input type="number" step="any" name="rightwrist_y" id="rightwrist_y" hidden>
+                          <input type="number" step="any" name="lefthip_x" id="lefthip_x" hidden>
+                          <input type="number" step="any" name="lefthip_y" id="lefthip_y" hidden>
+                          <input type="number" step="any" name="righthip_x" id="righthip_x" hidden>
+                          <input type="number" step="any" name="righthip_y" id="righthip_y" hidden>
+                          <input type="number" step="any" name="leftknee_x" id="leftknee_x" hidden>
+                          <input type="number" step="any" name="leftknee_y" id="leftknee_y" hidden>
+                          <input type="number" step="any" name="rightknee_x" id="rightknee_x" hidden>
+                          <input type="number" step="any" name="rightknee_y" id="rightknee_y" hidden>
+                          <input type="number" step="any" name="leftankle_x" id="leftankle_x" hidden>
+                          <input type="number" step="any" name="leftankle_y" id="leftankle_y" hidden>
+                          <input type="number" step="any" name="rightankle_x" id="rightankle_x" hidden>
+                          <input type="number" step="any" name="rightankle_y" id="rightankle_y" hidden>
+                        <div class="p-t-15">
+                            <button class="site-btn sb-gradient" type="submit">Add Pose</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <!-- Main JS-->
+    <script src="{% static 'js/global.js' %}"></script>
+    <script type="text/javascript">
+        document.getElementById('generate').addEventListener('click',function setdatapoints(){
+            var flipHorizontal = false;
+            var imageElement = document.getElementById('img_show');
+            posenet.load().then(function(net) {
+            const pose = net.estimateSinglePose(imageElement, {
+                flipHorizontal: true
+            });
+            return pose;
+            }).then(function(pose) {
+            let keypoints = pose.keypoints;
+            console.log(keypoints[0]['position']['x'])
+            for(i=0;i<keypoints.length;i++){
+                let id = keypoints[i]['part'].toLowerCase();
+                document.getElementById(id+'_x').value = keypoints[i]['position']['x'];
+                document.getElementById(id+'_y').value = keypoints[i]['position']['y'];
+            }
+            })
+        })
+    </script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block main %}
+<div class="center" style="margin-top: 55px;">
+        
+    <div class="list">
+        {% for pose in userposes %}
+        <div class="item">
+            <div class="name">{{pose.user.full_name}}</div>
+            <div class="score">{{pose.points_earned}}</div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block main %}
+<!-- Page top Section -->
+<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-white">
+                <h2>My Progress</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page top Section end -->
+
+<!-- Classes Section -->
+<section class="classes-page-section spad overflow-hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="row">
+                    {% for pose in userposes %}
+                    <div class="col">
+                        <div class="classes-item-warp">
+                            <div class="classes-item">
+                                <div class="ci-img">
+                                    <img src="{{pose.pose.img_url}}" alt="">
+                                </div>
+                                <div class="ci-text">
+                                    <h4>Pose Name : {{pose.pose.pose_name}}</h4>
+                                    <div class="ci-metas">
+                                        <!-- <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri</div> -->
+                                        <div class="ci-meta"><i class="material-icons">alarm_on</i>Duration : {{pose.pose.user_duration}}</div>
+                                    </div>
+                                    <p>Description : {{pose.pose.user_duration}}</p>
+                                    <p>Posetype : {{pose.pose.pose_type}}</p>
+                                    <p>My score : {{pose.points_earned}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Classes Section end -->
+{% endblock %}

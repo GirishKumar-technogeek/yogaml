@@ -1,0 +1,38 @@
+{% extends 'app/layout.html' %}
+
+{% block main %}
+<section class="classes-page-section spad overflow-hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <div class="row">
+                    {% for pose in poses %}
+						<div class="col">
+							<div class="classes-item-warp">
+								<div class="classes-item">
+									<div class="ci-img">
+										<img src="{{pose.img_url}}" alt="">
+									</div>
+									<div class="ci-text">
+										<h4>Pose Name : {{pose.pose_name}}</h4>
+										<div class="ci-metas">
+											<div class="ci-meta"><i class="material-icons">alarm_on</i>Duration : {{pose.user_duration}}</div>
+										</div>
+										<p>Description : {{pose.pose_description}}</p>
+										<p>Posetype : {{pose.pose_type}}</p>
+									</div>
+                                    <div class="ci-bottom">
+                                        <a href="{% url 'view_pose' pk=pose.pk %}" class="site-btn sb-gradient">Start</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
