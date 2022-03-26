@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'yogaml.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default="postgres://lorqoqsfxgslpc:0814d65a80f301d0cb6045a926619b1bb120c7c92277f7db9aebb3460c41c7f2@ec2-3-225-213-67.compute-1.amazonaws.com:5432/da3sfa5i6sotnl"
+        default="postgres://sbormgqgsoxuay:1089bfb1a76dfb809de04a6ea69cb6484ea00dd59b13cb9d6d5d315b3922be28@ec2-44-194-92-192.compute-1.amazonaws.com:5432/dbavsq3577pg65"
     )
 }
 
